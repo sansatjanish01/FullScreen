@@ -1,10 +1,5 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.toggleFullscreen) {
-      toggleFullscreen();
-    }
-  });
-  
-  function toggleFullscreen() {
+function toggleFullscreen() {
+  try {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
     } else {
@@ -12,4 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         document.exitFullscreen();
       }
     }
-  }  
+  } catch (error) {
+    console.error('Error toggling fullscreen:', error);
+  }
+}
